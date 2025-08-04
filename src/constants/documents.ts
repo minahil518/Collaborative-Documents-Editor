@@ -12,12 +12,6 @@ export const mockDocuments = [
         <li>Offline support and autosave</li>
       </ul>
       <p>This overview serves as a foundational document to align the team and stakeholders on the project’s direction and expectations.</p>
-    `,
-  },
-  {
-    id: '2',
-    title: 'Meeting Notes',
-    content: `
       <p>Notes from our latest team meeting.</p>
       <p>Meeting notes are a concise yet comprehensive record of the discussions, decisions, and action items from a meeting.</p>
       <p>They serve as an official reference, capturing key points such as the meeting’s purpose, attendees, topics covered, and responsibilities assigned. Well-structured meeting notes help ensure that all participants have a clear understanding of what was discussed and agreed upon, while also providing a point of reference for those who could not attend.</p>
@@ -28,12 +22,6 @@ export const mockDocuments = [
         <li>Set up backend authentication module</li>
         <li>Assign roles to all registered users</li>
       </ul>
-    `,
-  },
-  {
-    id: '3',
-    title: 'Development Plan',
-    content: `
       <p>This development plan outlines the key phases and milestones for the upcoming release cycle.</p>
       <h3>Phases:</h3>
       <ol>
@@ -43,21 +31,6 @@ export const mockDocuments = [
         <li><strong>Phase 4 – Polish & Test:</strong> UI improvements, bug fixes, and QA testing.</li>
       </ol>
       <p>Following this roadmap will help ensure smooth execution and timely delivery.</p>
-    `,
-  },
-  {
-    id: '4',
-    title: 'Feature Requests',
-    content: `
-      <p>Below is a list of user-requested features for future implementation:</p>
-      <ul>
-        <li>Dark mode support</li>
-        <li>Version history with rollback</li>
-        <li>Drag-and-drop support for document sections</li>
-        <li>Ability to mention users in comments</li>
-        <li>Custom themes and branding for documents</li>
-      </ul>
-      <p>These features have been logged for prioritization in upcoming sprints. Users will be notified as they are addressed.</p>
     `,
   }
 ];

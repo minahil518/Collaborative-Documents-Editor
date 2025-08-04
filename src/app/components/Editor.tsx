@@ -55,7 +55,6 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
 
         {userRole === 'editor' && (
           <FloatingToolbar editor={editor} />
-
         )}
       </div>
     </div>

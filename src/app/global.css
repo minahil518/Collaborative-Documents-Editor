@@ -10,13 +10,9 @@
   outline: none;
   width: 100%;
 }
-
-/* For mobile */
 .floating-threads {
   display: none;
 }
-
-/* For desktop */
 .anchored-threads {
   display: block;
   max-width: 300px;

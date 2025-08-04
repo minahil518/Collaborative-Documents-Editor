@@ -1,15 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import documentReducer from './features/document/documentSlice'
-import userReducer from './features/user/userSlice'
-import commentReducer from './features/comment/commentSlice'
-import authReducer from './features/auth/authSlice' 
 
 export const store = configureStore({
   reducer: {
     document: documentReducer,
-    user: userReducer,
-    comments: commentReducer,
-    auth: authReducer
   },
 })
 
