@@ -17,33 +17,34 @@ A real-time collaborative document editing application built with **React**, **T
 ## 🧑‍💻 Setup Instructions
 
 1. **Clone the Repository**
-   ```git clone https://github.com/your-username/Collaborative-Documents-Editor.git
-   cd Collaborative-Documents-Editor
+   
+   - ```git clone https://github.com/your-username/Collaborative-Documents-Editor.git```
+   
+   - `cd Collaborative-Documents-Editor`
 
-2. **Install Dependencies**
-   ```npm install```
+3. **Install Dependencies**
+   - ```npm install```
 
-3. **Run the Development Server**
-  ``` npm start```
+4. **Run the Development Server**
+  - ``` npm start```
 
    ✅ The app uses a public Liveblocks API key and requires no additional backend setup.
 
 
 ## Design Decisions & Assumptions
-📐 Editor Stack
-Tiptap is used as the core text editor with extension support.
-
-Liveblocks + Yjs handle real-time collaboration (cursor, presence, shared state).
+- 📐 Editor Stack
+- Tiptap is used as the core text editor with extension support.
+- Liveblocks + Yjs handle real-time collaboration (cursor, presence, shared state).
 
 ## 👤 User Identity
-Each tab simulates a unique user.
-This identity includes a random name, color, and avatar (used across comments and cursors). It's not persisted as well.
+- Each tab simulates a unique user.
+- This identity includes a random name, color, and avatar (used across comments and cursors). It's not persisted as well.
 
 
 ## Tech Stack
--React & Redux Toolkit
--Tiptap v2
--Liveblocks
--Yjs
--TypeScript
--faker.js, uuid, Bootstrap
+- React & Redux Toolkit
+- Tiptap v2
+- Liveblocks
+- Yjs
+- TypeScript
+- faker.js, uuid, Bootstrap
