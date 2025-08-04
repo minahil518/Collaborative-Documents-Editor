@@ -51,5 +51,5 @@ A real-time collaborative document editing application built with **React**, **T
 
 
 
-###VISUAL DISPLAY:
+## VISUAL DISPLAY:
 - https://www.loom.com/share/9565303a6c974741880359b4ff94d392
