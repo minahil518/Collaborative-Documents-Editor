@@ -15,7 +15,6 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
   const dispatch = useAppDispatch()
   const { content } = useAppSelector(state => state.document)
   const liveblocks = useLiveblocksExtension()
-
   const editor = useEditor({
     extensions: [
       liveblocks,
@@ -26,16 +25,26 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
     content,
     editorProps: {
       attributes: {
-        class: 'prose min-h-[300px] p-2 outline-none',
+        class: `prose min-h-[300px] p-2 outline-none ${
+          userRole === 'viewer' ? 'cursor-not-allowed select-none' : ''
+        }`,
+        style: userRole === 'viewer' ? 'caret-color: transparent;' : '',
       },
     },
   })
-
   useEffect(() => {
     if (editor) {
       dispatch(setContent(editor.getHTML()))
     }
   }, [editor, dispatch])
+
+  useEffect(() => {
+    editor?.view.dom.addEventListener('keydown', (e) => {
+      if (userRole === 'viewer') {
+        e.preventDefault()
+      }
+    })
+  }, [editor, userRole])
 
   return (
     <div className="container my-4">
