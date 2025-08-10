@@ -78,5 +78,4 @@ const EditorWithRoleBasedAccess = () => {
   return <Editor userRole={role} />;
 };
 
-
 export default DocumentEditor
