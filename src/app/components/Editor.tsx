@@ -1,20 +1,37 @@
-import React, { useEffect } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import React, { useEffect, useState } from 'react'
 import StarterKit from '@tiptap/starter-kit'
+import { useLiveblocksExtension, FloatingToolbar, Toolbar } from "@liveblocks/react-tiptap"
+import { useEditor, EditorContent } from '@tiptap/react'
+import { useRoom, useStatus } from "@liveblocks/react";
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setContent } from '../features/document/documentSlice'
-import Toolbar from './ToolBar'
-import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap"
-import { Threads } from './Threads'
+import { COLORS } from '../constants/cursorColors'
+import Toolbars from './ToolBar'
+import Threads  from './Threads'
+import useLiveCursors from './LiveCursor'
+import Cursor from './Cursor'
+import EditGuard from './EditGuard'
+import OfflineToggle from './OfflineToggle'
+
 interface EditorProps {
   userRole: string;
 }
 
-
 const Editor: React.FC<EditorProps> = ({ userRole }) => {
-  const dispatch = useAppDispatch()
-  const { content } = useAppSelector(state => state.document)
-  const liveblocks = useLiveblocksExtension()
+  const room = useRoom();
+  const liveblocks = useLiveblocksExtension();
+  const cursors = useLiveCursors();
+  const dispatch = useAppDispatch();
+  const { content } = useAppSelector(state => state.document);
+  const connectionStatus = useStatus();
+  const [manualOffline, setManualOffline] = useState(false);
+  const isConnected = connectionStatus === "connected";
+  const isOffline = manualOffline || !isConnected;
+  const canEdit = userRole === "editor" || userRole === "reviewer";
+
+  const goOffline = () => { setManualOffline(true); room.disconnect(); };
+  const goOnline = () => { setManualOffline(false); room.connect(); };
+  
   const editor = useEditor({
     extensions: [
       liveblocks,
@@ -25,13 +42,14 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
     content,
     editorProps: {
       attributes: {
-        class: `prose min-h-[300px] p-2 outline-none ${
-          userRole === 'viewer' ? 'cursor-not-allowed select-none' : ''
-        }`,
+        class: `prose min-h-[300px] p-2 outline-none ${userRole === 'viewer' ? 'cursor-not-allowed select-none' : ''
+          }`,
         style: userRole === 'viewer' ? 'caret-color: transparent;' : '',
       },
     },
+    editable: canEdit,
   })
+
   useEffect(() => {
     if (editor) {
       dispatch(setContent(editor.getHTML()))
@@ -39,34 +57,49 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
   }, [editor, dispatch])
 
   useEffect(() => {
-    editor?.view.dom.addEventListener('keydown', (e) => {
-      if (userRole === 'viewer') {
-        e.preventDefault()
-      }
-    })
-  }, [editor, userRole])
+    editor?.setEditable(canEdit)
+  }, [editor, canEdit])
+
 
   return (
-    <div className="container my-4">
-      <div className="mb-2 text-end text-muted">
-        <strong>Role:</strong> {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
-      </div>
-
-      {userRole === 'editor' && (
-        <Toolbar editor={editor} userRole={userRole} />
-      )}
-
-      <div className="bg-white shadow p-4 rounded border" style={{ minHeight: '1000px' }}>
-        <EditorContent editor={editor} />
-        {['editor', 'reviewer'].includes(userRole) && (
-          <Threads editor={editor} />
-        )}
-
+    <>
+      <OfflineToggle
+        isOffline={isOffline}
+        onToggle={(next) => (next ? goOffline() : goOnline())}
+      />
+      <div className="container my-4 editor-page">
+        <div className="mb-2 text-end text-muted">
+          <strong>Role:</strong> {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
+        </div>
         {userRole === 'editor' && (
-          <FloatingToolbar editor={editor} />
+          <Toolbars editor={editor} userRole={userRole} />
         )}
+        <div className="bg-white shadow p-4 rounded border" style={{ minHeight: '1000px' }}>
+          <EditGuard locked={userRole === 'reviewer'}>
+            <EditorContent editor={editor} />
+          </EditGuard>
+          {['editor', 'reviewer'].includes(userRole) && (
+            <Threads editor={editor} />
+          )}
+          {userRole === 'editor' && (
+            <FloatingToolbar editor={editor} />
+          )}
+          {userRole === 'reviewer' && (
+            <FloatingToolbar editor={editor}>
+              <Toolbar.SectionCollaboration />
+            </FloatingToolbar>
+          )}
+        </div>
       </div>
-    </div>
+      {cursors.map(({ x, y, connectionId }) => (
+        <Cursor
+          key={connectionId}
+          color={COLORS[connectionId % COLORS.length]}
+          x={x}
+          y={y}
+        />
+      ))}
+    </>
   )
 }
 export default Editor

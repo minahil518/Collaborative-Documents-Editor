@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../app/store'
-import { setActiveDocument } from '../app/features/document/documentSlice'
-import Editor from '../app/components/Editor'
-import RoleSelector from '../app/components/RoleSelector'
+import { RootState } from '../store'
+import { setActiveDocument } from '../features/document/documentSlice'
+import Editor from '../components/Editor'
+import RoleSelector from '../components/RoleSelector'
 import {
   LiveblocksProvider,
   RoomProvider,
@@ -38,7 +38,7 @@ const DocumentEditor: React.FC = () => {
           </div>
         </div>
         <LiveblocksProvider
-          publicApiKey={process.env.REACT_APP_LIVEBLOCKS_PUBLIC_KEY || ''}
+          publicApiKey={"pk_dev_fuEL9SkJMqGwLkE_cS1M8v_jEa5iLVqM3MotU9DzTnXCuK0J1pTkzV7wD1c51hrn"}
           resolveUsers={async ({ userIds }) => {
             return userIds.map((userId) => ({
               id: userId,

@@ -5,12 +5,8 @@ interface ToolbarProps {
   editor: Editor | null;
   userRole: string;
 }
-
 const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
-
-  
   if (!editor) return null
-
   return (
     <div className="btn-toolbar mb-3" role="toolbar">
       <div className="btn-group me-2" role="group">

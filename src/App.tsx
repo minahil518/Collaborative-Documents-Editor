@@ -1,9 +1,9 @@
 
 import React from 'react'
-import DocumentEditor from './pages/DocumentEditor'
 import "@liveblocks/react-ui/styles.css";
 import "@liveblocks/react-tiptap/styles.css";
-import "./app/global.css";
+import "./app/assets/styles/global.css";
+import DocumentEditor from './pages/DocumentEditor'
 
 const App: React.FC = () => {
   return (
