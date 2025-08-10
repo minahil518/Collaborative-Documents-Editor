@@ -12,7 +12,7 @@ import useLiveCursors from './LiveCursor'
 import Cursor from './Cursor'
 import EditGuard from './EditGuard'
 import OfflineToggle from './OfflineToggle'
-
+import '../assets/styles/editor.css'
 interface EditorProps {
   userRole: string;
 }
