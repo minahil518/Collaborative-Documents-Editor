@@ -36,7 +36,8 @@ export default function OfflineToggle({
       data-state={isOffline ? "offline" : "online"}
       disabled={disabled}
     >
-      <span className="ot-track" />      
+      <span className="ot-track" />
+      
       <span className="ot-thumb" aria-hidden="true" />
       <span className="ot-glow" aria-hidden="true" />
       <span className="ot-label">{isOffline ? "Offline" : "Online"}</span>

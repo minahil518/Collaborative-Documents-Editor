@@ -63,10 +63,21 @@ const Editor: React.FC<EditorProps> = ({ userRole }) => {
 
   return (
     <>
-      <OfflineToggle
-        isOffline={isOffline}
-        onToggle={(next) => (next ? goOffline() : goOnline())}
-      />
+<div className="d-flex align-items-center gap-2 w-100">
+  <OfflineToggle
+    isOffline={isOffline}
+    onToggle={(next) => (next ? goOffline() : goOnline())}
+  />
+
+  {isOffline && (
+    <div
+      className="alert alert-warning mb-0 flex-grow-1 py-1 px-2"
+      role="alert"
+    >
+      Changes made to the document will be shown to other users only when you are online.
+    </div>
+  )}
+</div>
       <div className="container my-4 editor-page">
         <div className="mb-2 text-end text-muted">
           <strong>Role:</strong> {userRole.charAt(0).toUpperCase() + userRole.slice(1)}
