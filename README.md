@@ -11,6 +11,8 @@ A real-time collaborative document editing application built with **React**, **T
 - 🧑‍🤝‍🧑 **Live presence**: Cursors, names, avatars for each user
 - 💬 **Inline commenting and review threads**
 - 🔌 **Redux-powered document state management**
+-  **Offline and Online toggle Based Collabaration**
+-  **Cursor Activity Simulation**
 
 ---
 
@@ -27,6 +29,9 @@ A real-time collaborative document editing application built with **React**, **T
 
 4. **Run the Development Server**
   - ``` npm start```
+   
+5. **Simulate Cursor Activity**
+    - ```npx tsx simulate-activity.ts```
 
    ✅ The app uses a public Liveblocks API key and requires no additional backend setup.
 
@@ -34,7 +39,7 @@ A real-time collaborative document editing application built with **React**, **T
 ## Design Decisions & Assumptions
 - 📐 Editor Stack
 - Tiptap is used as the core text editor with extension support.
-- Liveblocks + Yjs handle real-time collaboration (cursor, presence, shared state).
+- Liveblocks handle real-time collaboration (cursor, presence, shared state).
 
 ## 👤 User Identity
 - Each tab simulates a unique user.
@@ -48,8 +53,7 @@ A real-time collaborative document editing application built with **React**, **T
 - Yjs
 - TypeScript
 - faker.js, uuid, Bootstrap
-
-
+- playwright for simulation
 
 ## VISUAL DISPLAY:
 - https://www.loom.com/share/9565303a6c974741880359b4ff94d392
