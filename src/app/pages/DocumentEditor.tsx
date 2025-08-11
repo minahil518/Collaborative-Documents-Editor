@@ -38,7 +38,7 @@ const DocumentEditor: React.FC = () => {
           </div>
         </div>
         <LiveblocksProvider
-          publicApiKey={"pk_dev_fuEL9SkJMqGwLkE_cS1M8v_jEa5iLVqM3MotU9DzTnXCuK0J1pTkzV7wD1c51hrn"}
+          publicApiKey={process.env.REACT_APP_LIVEBLOCKS_PUBLIC_KEY || ''}
           resolveUsers={async ({ userIds }) => {
             return userIds.map((userId) => ({
               id: userId,
